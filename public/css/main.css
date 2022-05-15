@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #4e6c78;
+}
+
+.server-button {
+    min-width: 125px;
+}
+
+.rotate {
+    animation: 2s linear infinite svg-animation;
+}
+
+@keyframes svg-animation {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg)
+    }
+}
+
+.text-black-75 {
+    color: rgba(0, 0, 0, .6);
+}

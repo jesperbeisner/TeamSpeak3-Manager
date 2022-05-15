@@ -1,0 +1,21 @@
+parameters:
+    app.password: "%env(resolve:APP_PASSWORD)%"
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\Logger\DiscordLogger:
+        arguments:
+            $appName: "%env(resolve:APP_NAME)%"
+            $webhook: "%env(resolve:DISCORD_WEBHOOK)%"
+
+    Psr\Log\LoggerInterface $discordLogger: '@App\Logger\DiscordLogger'

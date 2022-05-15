@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div id="success-message-row" class="row text-center d-none">
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <div>
+                    <i class="bi bi-hdd-stack-fill me-1"></i>
+                    <strong id="success-message"></strong>
+                    <i class="bi bi-hdd-stack-fill ms-1"></i>
+                </div>
+                <p id="extra-success-message" class="pt-2 d-none"></p>
+                <button id="button-close-success-message-row" class="btn-close" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="error-message-row" class="row text-center d-none">
+        <div class="col-md-12">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <div>
+                    <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                    <strong id="error-message"></strong>
+                    <i class="bi bi-exclamation-triangle-fill ms-1"></i>
+                </div>
+                <p id="extra-error-message" class="pt-2 d-none"></p>
+                <button id="button-close-error-message-row" class="btn-close" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-black-75" id="servers-headline">
+                        Servers
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                            <thead>
+                            <tr>
+                                <th scope="col">Port</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Started</th>
+                                <th scope="col">Container</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for server in servers %}
+                                <tr id="server-row-{{ server.port }}">
+                                    <td id="port-data-{{ server.port }}">
+                                        {{ server.port }}
+                                    </td>
+                                    <td id="status-data-{{ server.port }}">
+                                        {% if server.started == null %}
+                                            <i class="bi bi-dash-circle-fill text-danger"></i>
+                                        {% else %}
+                                            <i class="bi bi-check-circle-fill text-success"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td id="started-data-{{ server.port }}">
+                                        {{ server.started == null ? '-' : server.started|date('d.m.Y H:i:s') }}
+                                    </td>
+                                    <td id="container-name-data-{{ server.port }}">
+                                        {{ server.containerName }}
+                                    </td>
+                                    <td>
+                                        {% if server.started == null %}
+                                            <button class="btn btn-success server-button server-start-button"
+                                                    data-port="{{ server.port }}">
+                                                Start Server
+                                            </button>
+                                        {% else %}
+                                            <button class="btn btn-danger server-button server-stop-button"
+                                                    data-port="{{ server.port }}">
+                                                Stop Server
+                                            </button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="token-history-row" class="row mb-5 {{ keys|length < 1 ? 'd-none' : '' }}">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-black-75" id="token-history-headline">
+                        Token History
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" style="max-height: 450px">
+                        <table class="table table-hover text-center">
+                            <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Port</th>
+                                <th scope="col">Created</th>
+                                <th scope="col">Server-Admin-Token</th>
+                            </tr>
+                            </thead>
+                            <tbody id="token-history-table-body">
+                            {% for key in keys %}
+                                <tr>
+                                    <th scope="row" class="id-data">
+                                        {{ key.id }}
+                                    </th>
+                                    <td class="port-data">
+                                        {{ key.server.port }}
+                                    </td>
+                                    <td class="created-data">
+                                        {{ key.created|date('d.m.Y H:i:s') }}
+                                    </td>
+                                    <td class="token-data">
+                                        {{ key.token }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript_end %}
+    {{ parent() }}
+    <script src="{{ asset('js/index.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}TeamSpeak3-Server-Manager{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}" sizes="16x16">
+
+    {% block stylesheets %}
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+        <link href="{{ asset('icons/bootstrap-icons.css') }}" rel="stylesheet">
+    {% endblock %}
+
+    {% block javascript_start %}
+        <script>
+          const serverUrl = "{{ app.request.server.get('TEAMSPEAK_SERVER_URL') }}";
+        </script>
+    {% endblock %}
+</head>
+<body>
+
+{% include 'layout/navigation.html.twig' %}
+
+<div>
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+</div>
+
+{% block javascript_end %}
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+{% endblock %}
+</body>
+</html>

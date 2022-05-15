@@ -1,0 +1,48 @@
+{% set routeName = app.request.get('_route') %}
+
+<div class="bg-white mb-5">
+    <nav class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <span class="fs-3 text-black-75">TeamSpeak3-Server-Manager</span>
+            </a>
+            <ul class="nav nav-pills">
+                <li class="nav-item text-center ms-2" style="min-width: 100px">
+                    <a
+                            href="{{ path('index') }}"
+                            class="nav-link {{ routeName == 'index' ? 'active' : '' }}"
+                            {{ routeName == 'index' ? 'aria-current="page"' : '' }}>
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item text-center ms-2" style="min-width: 100px">
+                    <a
+                            href="{{ path('active') }}"
+                            class="nav-link {{ routeName == 'active' ? 'active' : '' }}"
+                            {{ routeName == 'active' ? 'aria-current="page"' : '' }}>
+                        Active
+                    </a>
+                </li>
+
+                <li class="nav-item text-center ms-2" style="min-width: 100px">
+                    <a
+                            href="{{ path('history') }}"
+                            class="nav-link {{ routeName == 'history' ? 'active' : '' }}"
+                            {{ routeName == 'history' ? 'aria-current="page"' : '' }}>
+                        History
+                    </a>
+                </li>
+
+                <li class="nav-item text-center ms-2" style="min-width: 100px">
+                    <a
+                            href="{{ path('about') }}"
+                            class="nav-link {{ routeName == 'about' ? 'active' : '' }}"
+                            {{ routeName == 'about' ? 'aria-current="page"' : '' }}>
+                        About
+                    </a>
+                </li>
+            </ul>
+        </header>
+    </nav>
+</div>
