@@ -47,7 +47,7 @@ class CheckClientsCommand extends Command
             /** @var LiveRepository $liveRepository */
             $liveRepository = $this->entityManager->getRepository(Live::class);
 
-            for ($i = 0; $i < 2; $i++) {
+            for ($i = 0; $i < 5; $i++) {
                 foreach ($servers as $server) {
                     /** @var Live[] $newOfflineClients */
                     $newOfflineClients = [];
@@ -131,7 +131,7 @@ class CheckClientsCommand extends Command
 
                 $output->writeln("Check number " . ($i + 1));
 
-                sleep(3);
+                sleep(10);
             }
         } else {
             $output->writeln('No online servers found');
