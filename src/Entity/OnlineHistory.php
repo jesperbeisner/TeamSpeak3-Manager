@@ -33,6 +33,9 @@ class OnlineHistory
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTime $endSession = null;
 
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    private ?int $seconds = null;
+
     public function __construct()
     {
         $this->startSession = new DateTime();
@@ -96,5 +99,15 @@ class OnlineHistory
     public function setEndSession(?DateTime $endSession): void
     {
         $this->endSession = $endSession;
+    }
+
+    public function getSeconds(): ?int
+    {
+        return $this->seconds;
+    }
+
+    public function setSeconds(?int $seconds): void
+    {
+        $this->seconds = $seconds;
     }
 }

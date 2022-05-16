@@ -36,7 +36,9 @@ class CheckClientsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        set_time_limit(75);
+        set_time_limit(60);
+
+        $start = microtime(true);
         $output->writeln("Command 'app:check-clients' started.");
 
         /** @var ServerRepository $serverRepository */
@@ -116,12 +118,12 @@ class CheckClientsCommand extends Command
 
                     // Search for the started OnlineHistory and close it
                     foreach ($newOfflineClients as $newOfflineClient) {
-                        $onlineHistory = $onlineHistoryRepository->findOneBy([
-                            'server' => $server,
-                            'uuid' => $newOfflineClient->getUuid(),
-                        ]);
+                        $onlineHistory = $onlineHistoryRepository->findStartedOnlineHistoryByServerAndUuid($server, $newOfflineClient->getUuid());
 
-                        $onlineHistory?->setEndSession(new DateTime());
+                        if ($onlineHistory !== null) {
+                            $onlineHistory->setEndSession(new DateTime());
+                            $onlineHistory->setSeconds($onlineHistory->getEndSession()->getTimestamp() - $onlineHistory->getStartSession()->getTimestamp());
+                        }
                     }
 
                     $this->entityManager->flush();
@@ -137,7 +139,8 @@ class CheckClientsCommand extends Command
             $output->writeln('No online servers found');
         }
 
-        $output->writeln("Command 'app:check-clients' finished.");
+        $seconds = round(microtime(true) - $start);
+        $output->writeln("Command 'app:check-clients' finished in $seconds seconds.");
 
         return Command::SUCCESS;
     }

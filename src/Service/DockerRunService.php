@@ -26,6 +26,7 @@ class DockerRunService
             "--name", $server->getContainerName(),
             "-p", "{$server->getPort()}:9987/udp",
             "-p", "{$server->getWebQueryPort()}:10080",
+            "--restart", "always",
             "-v", "$queryIpAllowlistFileName:/var/ts3server/query_ip_allowlist.txt",
             "-e", "TS3SERVER_LICENSE=accept",
             "-e", "TS3SERVER_QUERY_PROTOCOLS=http",
