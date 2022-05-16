@@ -8,11 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ActiveController extends AbstractController
+class LiveController extends AbstractController
 {
-    #[Route('/active', name: 'active')]
+    #[Route('/live', name: 'live')]
     public function index(): Response
     {
-        return $this->render('active/index.html.twig');
+        return $this->render('live/index.html.twig');
     }
 }

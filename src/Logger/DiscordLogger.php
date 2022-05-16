@@ -44,12 +44,14 @@ class DiscordLogger extends AbstractLogger
             'json' => [
                 'embeds' => [
                     [
-                        'title' => $this->appName,
+                        'title' => $this->appName . ' - ' . (new DateTime())->format('Y-m-d - H:i:s'),
                         'description' => $message,
                         'color' => $this->colors[$level],
+                        /*
                         'footer' => [
                             'text' => (new DateTime())->format('Y-m-d - H:i:s'),
                         ],
+                        */
                     ],
                 ],
             ],

@@ -24,7 +24,8 @@ class ServerHistoryRepository extends ServiceEntityRepository
 
     public function findLastServerStartedHistory(Server $server): ?ServerHistory
     {
-        return $this->createQueryBuilder('sh')
+        /** @var ServerHistory|null $result */
+        $result = $this->createQueryBuilder('sh')
             ->where('sh.server = :server')
             ->andWhere('sh.action = :action')
             ->orderBy('sh.id', 'DESC')
@@ -34,5 +35,7 @@ class ServerHistoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
+        return $result;
     }
 }

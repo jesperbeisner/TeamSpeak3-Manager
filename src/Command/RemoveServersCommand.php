@@ -13,10 +13,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RemoveTeamSpeakServerCommand extends Command
+class RemoveServersCommand extends Command
 {
-    protected static $defaultName = 'app:remove-teamspeak-server';
-    protected static $defaultDescription = 'Removes all started teamspeak servers older than 24h.';
+    protected static $defaultName = 'app:remove-servers';
+    protected static $defaultDescription = 'Removes all started teamspeak servers older than 24 hours.';
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
@@ -30,8 +30,7 @@ class RemoveTeamSpeakServerCommand extends Command
     {
         /** @var ServerRepository $serverRepository */
         $serverRepository = $this->entityManager->getRepository(Server::class);
-
-        $servers = $serverRepository->findAllStartedAndSynchronizedServerOlderThan24Hours();
+        $servers = $serverRepository->findAllStartedAndSynchronizedServersOlderThan24Hours();
 
         $logText = '';
 
@@ -49,7 +48,7 @@ class RemoveTeamSpeakServerCommand extends Command
             $this->discordLogger->info($logText);
         }
 
-        $output->writeln(count($servers) . ' server found and successfully stopped.');
+        $output->writeln(count($servers) . ' servers found and successfully stopped.');
 
         return Command::SUCCESS;
     }

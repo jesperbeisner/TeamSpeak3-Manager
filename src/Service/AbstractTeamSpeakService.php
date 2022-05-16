@@ -25,7 +25,7 @@ abstract class AbstractTeamSpeakService
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<int, array<string, string>>|null
      */
     protected function checkResponseForError(ResponseInterface $response): ?array
     {
@@ -47,7 +47,7 @@ abstract class AbstractTeamSpeakService
         }
 
         if (array_key_exists('body', $result)) {
-            /** @var array<string, mixed> $data */
+            /** @var array<int, array<string, string>> $data */
             $data = $result['body'];
         }
 

@@ -25,9 +25,25 @@ class ServerRepository extends ServiceEntityRepository
     /**
      * @return Server[]
      */
-    public function findAllStartedAndSynchronizedServerOlderThan24Hours(): array
+    public function findAllStartedServers(): array
     {
-        return $this->createQueryBuilder('s')
+        /** @var Server[] $result */
+        $result = $this->createQueryBuilder('s')
+            ->where('s.started IS NOT null')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $result;
+    }
+
+    /**
+     * @return Server[]
+     */
+    public function findAllStartedAndSynchronizedServersOlderThan24Hours(): array
+    {
+        /** @var Server[] $result */
+        $result = $this->createQueryBuilder('s')
             ->where('s.started < :date')
             ->andWhere('s.synchronized = :true')
             ->setParameter('true', true)
@@ -35,5 +51,7 @@ class ServerRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+
+        return $result;
     }
 }

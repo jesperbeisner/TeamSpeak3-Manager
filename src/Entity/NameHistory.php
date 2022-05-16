@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NameHistoryRepository::class)]
 #[ORM\Index(columns: ['uuid'])]
+#[ORM\Index(columns: ['username'])]
 class NameHistory
 {
     #[ORM\Id]

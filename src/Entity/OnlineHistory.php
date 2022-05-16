@@ -30,8 +30,13 @@ class OnlineHistory
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private DateTime $startSession;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private DateTime $endSession;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTime $endSession = null;
+
+    public function __construct()
+    {
+        $this->startSession = new DateTime();
+    }
 
     public function getId(): int
     {
@@ -83,12 +88,12 @@ class OnlineHistory
         $this->startSession = $startSession;
     }
 
-    public function getEndSession(): DateTime
+    public function getEndSession(): ?DateTime
     {
         return $this->endSession;
     }
 
-    public function setEndSession(DateTime $endSession): void
+    public function setEndSession(?DateTime $endSession): void
     {
         $this->endSession = $endSession;
     }
