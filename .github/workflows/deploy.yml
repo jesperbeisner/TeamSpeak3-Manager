@@ -13,9 +13,9 @@ jobs:
       - name: Deploy my new version
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secret.HOST }}
-          username: ${{ secret.USERNAME }}
-          password: ${{ secret.PASSWORD }}
-          port: ${{ secret.PORT }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
           script_stop: true
           script: ./deploy-teamspeak-server-manager.sh
