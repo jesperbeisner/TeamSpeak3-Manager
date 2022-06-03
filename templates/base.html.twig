@@ -22,11 +22,19 @@
 
 {% include 'layout/navigation.html.twig' %}
 
-<div>
+<main>
     <div class="container">
         {% block body %}{% endblock %}
     </div>
-</div>
+</main>
+
+<footer>
+    <div class="container">
+        <p class="text-center">
+            {% git_info() %}
+        </p>
+    </div>
+</footer>
 
 {% block javascript_end %}
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
