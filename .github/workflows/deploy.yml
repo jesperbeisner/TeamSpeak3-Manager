@@ -18,4 +18,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script_stop: true
-          script: ./deploy-teamspeak-server-manager.sh
+          script: ./teamspeak3-server-manager-deployment.sh
