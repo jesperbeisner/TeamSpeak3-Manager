@@ -1,0 +1,21 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Deploy my new version
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secret.HOST }}
+          username: ${{ secret.USERNAME }}
+          password: ${{ secret.PASSWORD }}
+          port: ${{ secret.PORT }}
+          script_stop: true
+          script: ./deploy-teamspeak-server-manager.sh
