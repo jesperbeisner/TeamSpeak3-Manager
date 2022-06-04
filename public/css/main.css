@@ -24,3 +24,11 @@ body {
 .text-black-75 {
     color: rgba(0, 0, 0, .6);
 }
+
+.commit-link {
+    color: rgba(0, 0, 0, .5);
+}
+
+.commit-link:hover {
+    color: rgba(0, 0, 0, 1);
+}
