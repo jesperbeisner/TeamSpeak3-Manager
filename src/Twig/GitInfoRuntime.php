@@ -9,6 +9,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class GitInfoRuntime implements RuntimeExtensionInterface
 {
+    private const INIT_COMMIT = 'aebcdda2c9550386ace42d3a04df55aa0cf56850';
+
     public function __construct(
         private readonly ParameterBagInterface $parameterBag
     ) {}
@@ -18,15 +20,13 @@ class GitInfoRuntime implements RuntimeExtensionInterface
         $filePath = $this->parameterBag->get('kernel.project_dir') . '/git-info.txt';
 
         if (file_exists($filePath)) {
-            if (false === $gitInfo = file_get_contents($filePath)) {
-                return '';
+            if (false === $currentCommit = file_get_contents($filePath)) {
+                return self::INIT_COMMIT;
             }
 
-            $gitInfo = trim($gitInfo);
-
-            return '<a href="https://github.com/jesperbeisner/TeamSpeak3-Server-Manager/tree/' . $gitInfo . '">' . $gitInfo . '</a>';
+            return trim($currentCommit);
         }
 
-        return '';
+        return self::INIT_COMMIT;
     }
 }

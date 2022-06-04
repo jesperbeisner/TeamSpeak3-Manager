@@ -31,7 +31,9 @@
 <footer>
     <div class="container">
         <p class="text-center">
-            {{ git_info()|raw }}
+            <a href="https://github.com/jesperbeisner/TeamSpeak3-Server-Manager/tree/{{ git_info() }}">
+                {{ git_info() }}
+            </a>
         </p>
     </div>
 </footer>
