@@ -18,9 +18,13 @@ class GitInfoRuntime implements RuntimeExtensionInterface
         $filePath = $this->parameterBag->get('kernel.project_dir') . '/git-info.txt';
 
         if (file_exists($filePath)) {
-            return file_get_contents($filePath);
+            if (false === $gitInfo = file_get_contents($filePath)) {
+                return '';
+            }
+
+            return '<a href="https://github.com/jesperbeisner/TeamSpeak3-Server-Manager/tree/' . $gitInfo . '">' . $gitInfo . '</a>';
         }
 
-        return "Das ist ein Test";
+        return '';
     }
 }
