@@ -22,6 +22,8 @@ class GitInfoRuntime implements RuntimeExtensionInterface
                 return '';
             }
 
+            $gitInfo = trim($gitInfo);
+
             return '<a href="https://github.com/jesperbeisner/TeamSpeak3-Server-Manager/tree/' . $gitInfo . '">' . $gitInfo . '</a>';
         }
 
