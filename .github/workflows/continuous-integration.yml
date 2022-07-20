@@ -1,0 +1,27 @@
+name: Continuous Integration
+
+on: [push]
+
+jobs:
+  testing:
+    name: Run PHP-CS-Fixer, PHPUnit and PHPStan
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer:v2
+          ini-values: "memory_limit=-1"
+        env:
+          fail-fast: true
+
+      - name: Checkout Project
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: composer install
+
+      - name: Run Full Testsuite
+        run: composer test

@@ -18,5 +18,10 @@
 .phpunit.result.cache
 ###< phpunit/phpunit ###
 
-/reset_database.sh
-/notes.txt
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+/data/*
+!/data/.gitkeep

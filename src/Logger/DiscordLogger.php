@@ -36,7 +36,8 @@ class DiscordLogger extends AbstractLogger
         private readonly HttpClientInterface $httpClient,
         private readonly string $appName,
         private readonly string $webhook,
-    ) {}
+    ) {
+    }
 
     public function log($level, \Stringable|string $message, array $context = []): void
     {

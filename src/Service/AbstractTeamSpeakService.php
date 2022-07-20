@@ -13,7 +13,8 @@ abstract class AbstractTeamSpeakService
 {
     public function __construct(
         protected readonly HttpClientInterface $httpClient,
-    ) {}
+    ) {
+    }
 
     protected function makeRequest(Server $server, string $url): ResponseInterface
     {

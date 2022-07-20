@@ -14,7 +14,8 @@ class DockerLogsService
 {
     public function __construct(
         private readonly ParameterBagInterface $parameterBag,
-    ) {}
+    ) {
+    }
 
     /**
      * @return array<string>

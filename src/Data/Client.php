@@ -11,5 +11,6 @@ class Client
         public readonly int $databaseId,
         public readonly string $nickname,
         public readonly string $uuid,
-    ) {}
+    ) {
+    }
 }

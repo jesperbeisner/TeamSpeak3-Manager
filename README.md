@@ -2,54 +2,20 @@
 
 ## About
 
-Application to run, handle and list TeamSpeak3 Server specific actions.
-
+Small application to set up TeamSpeak3 servers with docker and manage them via a web interface.
 
 ## Local Setup
 
-### Start Docker Containers
-```shell
-docker-compose up -d
-```
-
-### Load Migrations
-```shell
+```bash
+# 1. Create sqlite database and load migrations
 php bin/console doctrine:migrations:migrate --no-interaction
-```
 
-### Load Fixtures
-```shell
-php bin/console doctrine:fixtures:load --no-interaction
-```
+# 2. Load test data
+php bin/console app:create-test-data
 
-### Start PHP Dev-Server
-```shell
-php -S localhost:8080 -t public
-```
+# 3. Start local development server (Symfony CLI needs to be installed)
+composer start
 
-### Visit In Browser
-```
+# 4. Visit
 http://localhost:8080
-```
-
-## Reset Database
-
-### Drop Database
-```shell
-php bin/console doctrine:database:drop --force
-```
-
-### Create Database
-```shell
-php bin/console doctrine:database:create
-```
-
-### Load Migrations
-```shell
-php bin/console doctrine:migrations:migrate --no-interaction
-```
-
-### Load Fixtures
-```shell
-php bin/console doctrine:fixtures:load --no-interaction
 ```

@@ -33,7 +33,8 @@ class ServerController extends AbstractController
         private readonly DockerLogsService $dockerLogsService,
         private readonly TeamSpeakService $teamSpeakService,
         private readonly TeamSpeakChannelService $teamSpeakChannelService,
-    ) {}
+    ) {
+    }
 
     #[Route('/server/{port<\d+>}/start', name: 'server-start', methods: ['POST', 'GET'])]
     public function serverStart(int $port): JsonResponse

@@ -13,7 +13,8 @@ class GitInfoRuntime implements RuntimeExtensionInterface
 
     public function __construct(
         private readonly ParameterBagInterface $parameterBag
-    ) {}
+    ) {
+    }
 
     public function getGitInfo(): string
     {

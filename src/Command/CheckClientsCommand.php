@@ -158,7 +158,7 @@ class CheckClientsCommand extends Command
                 unset($clients[$key]);
             }
 
-            if (in_array($client->uuid, $seenUuids)) {
+            if (in_array($client->uuid, $seenUuids, true)) {
                 unset($clients[$key]);
             }
 
